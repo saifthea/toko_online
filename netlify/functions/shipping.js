@@ -1,6 +1,6 @@
 exports.handler = async (event, context) => {
   const apiKey = process.env.KIRIMINAJA_API_KEY;
-  const originId = process.env.ORIGIN_DISTRICT_ID || "5822"; // ID Kecamatan Asal Toko
+  const originId = process.env.ORIGIN_DISTRICT_ID || "5822"; // ID Asal Toko
 
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -8,7 +8,6 @@ exports.handler = async (event, context) => {
     "Content-Type": "application/json"
   };
 
-  // Tangani HTTP OPTIONS (Preflight)
   if (event.httpMethod === "OPTIONS") {
     return { statusCode: 200, headers, body: "" };
   }
@@ -17,15 +16,10 @@ exports.handler = async (event, context) => {
     // 1. Pencarian Lokasi (GET)
     if (event.httpMethod === "GET") {
       const query = event.queryStringParameters.q || "";
-      if (query.length < 3) {
-        return { statusCode: 200, headers, body: JSON.stringify({ ok: true, results: [] }) };
-      }
+      if (query.length < 3) return { statusCode: 200, headers, body: JSON.stringify({ ok: true, results: [] }) };
 
       const res = await fetch(`https://api.kiriminaja.com/api/open/v2/district?search=${encodeURIComponent(query)}`, {
-        headers: {
-          "Authorization": `Bearer ${apiKey}`,
-          "Accept": "application/json"
-        }
+        headers: { "Authorization": `Bearer ${apiKey}`, "Accept": "application/json" }
       });
       const json = await res.json();
 
@@ -36,35 +30,27 @@ exports.handler = async (event, context) => {
         }));
         return { statusCode: 200, headers, body: JSON.stringify({ ok: true, results }) };
       }
-
       return { statusCode: 200, headers, body: JSON.stringify({ ok: false, results: [] }) };
     }
 
     // 2. Hitung Ongkir (POST)
     if (event.httpMethod === "POST") {
       const data = JSON.parse(event.body || "{}");
-      const { destination_id, items } = data;
+      const { destination_id, total_weight_grams } = data;
 
-      // Hitung estimasi berat total dalam Gram (default 1000g per item jika tidak diset)
-      let totalWeight = 1000;
-      if (items && items.length > 0) {
-        totalWeight = items.reduce((sum, i) => sum + ((i.qty || 1) * 1000), 0);
-      }
+      // Terima berat total presisi dari hitungan Frontend (index.html)
+      const totalWeight = total_weight_grams || 1000;
 
       const payload = {
         origin: Number(originId),
         destination: Number(destination_id),
-        weight: totalWeight,
+        weight: totalWeight, // Akan menjadi 1000(HP), 2000(Laptop), 4000(2 Laptop), dst.
         courier: "jne,jnt,sicepat,anteraja"
       };
 
       const res = await fetch("https://api.kiriminaja.com/api/open/v2/shipping_price", {
         method: "POST",
-        headers: {
-          "Authorization": `Bearer ${apiKey}`,
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
+        headers: { "Authorization": `Bearer ${apiKey}`, "Content-Type": "application/json", "Accept": "application/json" },
         body: JSON.stringify(payload)
       });
       const json = await res.json();
@@ -78,15 +64,9 @@ exports.handler = async (event, context) => {
         }));
         return { statusCode: 200, headers, body: JSON.stringify({ ok: true, options }) };
       }
-
       return { statusCode: 200, headers, body: JSON.stringify({ ok: false, message: "Gagal memuat tarif." }) };
     }
-
   } catch (err) {
-    return {
-      statusCode: 500,
-      headers,
-      body: JSON.stringify({ ok: false, message: err.message })
-    };
+    return { statusCode: 500, headers, body: JSON.stringify({ ok: false, message: err.message }) };
   }
 };
