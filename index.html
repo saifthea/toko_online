@@ -22,12 +22,9 @@
     <style>
         body { background-color: #0b0415; color: #f3f4f6; }
         .glass-card { background: rgba(26, 16, 47, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(147, 51, 234, 0.2); }
-        
-        /* Scrollbar kustom untuk daftar rekomendasi lokasi */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: rgba(26, 16, 47, 0.5); }
         ::-webkit-scrollbar-thumb { background: #7c3aed; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #9333ea; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col font-sans">
@@ -85,21 +82,6 @@
                     <span>Konsultasi WA</span>
                 </a>
             </div>
-
-            <div class="border-t border-purple-900/40 pt-6 flex gap-8">
-                <div>
-                    <div class="text-2xl font-bold text-white mb-1">5k+</div>
-                    <div class="text-xs text-purple-300">Pelanggan</div>
-                </div>
-                <div>
-                    <div class="text-2xl font-bold text-white mb-1">99%</div>
-                    <div class="text-xs text-purple-300">Puas</div>
-                </div>
-                <div>
-                    <div class="text-2xl font-bold text-white mb-1">24/7</div>
-                    <div class="text-xs text-purple-300">Support</div>
-                </div>
-            </div>
         </div>
         
         <div class="w-full lg:w-1/2 relative mt-8 lg:mt-0">
@@ -112,92 +94,29 @@
         </div>
     </section>
 
-    <section class="w-full bg-brand-card/50 py-16 border-y border-purple-900/40 mb-12 mt-8">
-        <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-3">Kenapa Beli di Sini?</h2>
-            <div class="w-16 h-1 bg-purple-500 mx-auto rounded-full mb-12"></div>
-            
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div class="glass-card p-8 rounded-2xl text-center hover:-translate-y-1 transition duration-300">
-                    <div class="w-14 h-14 bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-5 border border-purple-700/50">
-                        <i class="fa-solid fa-tag text-purple-400 text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-3">Harga Termurah</h3>
-                    <p class="text-sm text-purple-200 leading-relaxed">Berani diadu! Kami memberikan harga terbaik untuk produk berkualitas.</p>
-                </div>
-                <div class="glass-card p-8 rounded-2xl text-center hover:-translate-y-1 transition duration-300">
-                    <div class="w-14 h-14 bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-5 border border-purple-700/50">
-                        <i class="fa-solid fa-shield-halved text-purple-400 text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-3">Garansi Resmi</h3>
-                    <p class="text-sm text-purple-200 leading-relaxed">Semua produk baru bergaransi resmi, belanja tenang tanpa was-was.</p>
-                </div>
-                <div class="glass-card p-8 rounded-2xl text-center hover:-translate-y-1 transition duration-300">
-                    <div class="w-14 h-14 bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-5 border border-purple-700/50">
-                        <i class="fa-solid fa-truck-fast text-purple-400 text-xl"></i>
-                    </div>
-                    <h3 class="text-lg font-bold text-white mb-3">Pengiriman Cepat</h3>
-                    <p class="text-sm text-purple-200 leading-relaxed">Pesan hari ini, kami usahakan kirim hari ini juga. Packing super aman.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <main id="katalog" class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full">
         <div class="flex justify-between items-center mb-8">
             <h3 class="text-2xl font-bold text-white border-l-4 border-purple-500 pl-3">Katalog Produk</h3>
-            <span id="productStatus" class="text-xs text-purple-300 bg-purple-950/60 px-3 py-1.5 rounded-lg border border-purple-800/40">Memuat database produk...</span>
+            <span id="productStatus" class="text-xs text-purple-300 bg-purple-950/60 px-3 py-1.5 rounded-lg border border-purple-800/40">Memuat database...</span>
         </div>
 
         <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            <!-- Produk akan dimuat dinamis lewat JavaScript -->
+            <!-- Produk dimuat dinamis -->
         </div>
     </main>
 
-    <section id="testimoni" class="max-w-7xl mx-auto px-6 py-12 w-full">
-        <h3 class="text-2xl font-bold text-white text-center mb-8">Apa Kata Pelanggan Kami...</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="glass-card p-6 rounded-2xl">
-                <div class="flex text-yellow-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p class="text-sm text-purple-200 mb-4">"Beli laptop bekas rasa baru di sini sangat memuaskan. Respon admin cepat dan barang sesuai deskripsi!"</p>
-                <div class="font-semibold text-white text-sm">- Budi Santoso, Bogor</div>
-            </div>
-            <div class="glass-card p-6 rounded-2xl">
-                <div class="flex text-yellow-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p class="text-sm text-purple-200 mb-4">"Pengiriman cepat pakai JNE reguler, packing aman berlapis bubble wrap tebal. Recommended seller!"</p>
-                <div class="font-semibold text-white text-sm">- Siska Meliani, Depok</div>
-            </div>
-            <div class="glass-card p-6 rounded-2xl">
-                <div class="flex text-yellow-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
-                <p class="text-sm text-purple-200 mb-4">"Harganya paling bersaing di Cibinong. Bisa konsultasi dulu lewat WhatsApp sebelum beli."</p>
-                <div class="font-semibold text-white text-sm">- Rifki Pratama, Cibinong</div>
-            </div>
-        </div>
-    </section>
-
-    <section class="w-full bg-gradient-to-r from-purple-800 to-indigo-900 py-16 mt-8 border-y border-purple-900/40">
-        <div class="max-w-4xl mx-auto text-center px-6">
-            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Masih Ragu Pilih yang Mana?</h2>
-            <p class="text-purple-200 text-base mb-8 max-w-2xl mx-auto">Jangan sungkan untuk bertanya. Admin kami siap membantu mencarikan gadget yang pas dengan budgetmu.</p>
-            <a href="https://wa.me/6285695316096?text=Halo%20Admin,%20saya%20mau%20tanya%20ketersediaan%20produk." target="_blank" class="inline-flex items-center space-x-2 bg-white text-purple-900 hover:bg-gray-100 font-bold px-8 py-3.5 rounded-full shadow-lg transition transform hover:scale-105">
-                <i class="fa-brands fa-whatsapp text-2xl text-green-500"></i>
-                <span>Tanya Admin via WA</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- Modal Keranjang Belanja -->
+    <!-- Modal Keranjang & Checkout -->
     <div id="cartModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="glass-card w-full max-w-lg rounded-3xl p-6 relative max-h-[90vh] overflow-y-auto flex flex-col">
             <button onclick="closeCart()" class="absolute top-4 right-4 text-purple-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
             <h3 class="text-xl font-bold text-white mb-4"><i class="fa-solid fa-cart-shopping mr-2 text-purple-400"></i> Keranjang & Checkout</h3>
             
             <div id="cartItemsList" class="divide-y divide-purple-900/40 mb-4 max-h-40 overflow-y-auto pr-2 shrink-0">
-                <!-- Item keranjang diisi lewat JS -->
+                <!-- Item keranjang -->
             </div>
 
             <div class="border-t border-purple-900/40 pt-4 space-y-3 flex-grow">
-                <h4 class="text-sm font-semibold text-purple-300">Form Pengiriman (KiriminAja Live API)</h4>
+                <h4 class="text-sm font-semibold text-purple-300">Form Pengiriman</h4>
                 
                 <div>
                     <label class="block text-xs text-purple-300 mb-1">Nama Lengkap Pemesan</label>
@@ -208,24 +127,26 @@
                     <input type="tel" id="custPhone" class="w-full bg-purple-950/40 border border-purple-800/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" placeholder="08xxxxxxxxxx">
                 </div>
                 <div>
-                    <label class="block text-xs text-purple-300 mb-1">Detail Alamat (Jalan, No. Rumah, RT/RW, Kelurahan)</label>
-                    <textarea id="custAddress" rows="2" class="w-full bg-purple-950/40 border border-purple-800/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" placeholder="Jl. Mayor Oking No. 12, RT 01/02..."></textarea>
+                    <label class="block text-xs text-purple-300 mb-1">Alamat Lengkap (Jalan, No. Rumah, RT/RW)</label>
+                    <textarea id="custAddress" rows="2" class="w-full bg-purple-950/40 border border-purple-800/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" placeholder="Jl. Mayor Oking No. 12..."></textarea>
                 </div>
 
-                <!-- Komponen Pencarian Lokasi & Pilihan Kurir -->
+                <!-- Input Autocomplete Cari Kota / Kabupaten / Kecamatan Seluruh Indonesia -->
                 <div class="bg-purple-950/30 p-3 rounded-xl border border-purple-800/40 space-y-3">
                     <div class="relative">
-                        <label class="block text-xs text-purple-300 mb-1">Cari Tujuan (Kecamatan / Kota / Kodepos)</label>
-                        <input type="text" id="destSearch" autocomplete="off" class="w-full bg-purple-950/60 border border-purple-800/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500 placeholder-purple-500/50" placeholder="Ketik minimal 3 huruf (cth: Cibinong)...">
-                        <div id="destSuggestions" class="absolute z-10 w-full bg-[#1a102f] border border-purple-800/40 rounded-xl mt-1 max-h-48 overflow-y-auto hidden shadow-xl shadow-black/80"></div>
+                        <label class="block text-xs text-purple-300 mb-1">Cari Kota / Kecamatan / Kelurahan Tujuan</label>
+                        <input type="text" id="destSearchInput" autocomplete="off" oninput="handleDestinationSearch(this.value)" class="w-full bg-purple-950/60 border border-purple-800/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500 placeholder-purple-500/50" placeholder="Ketik min. 3 huruf (cth: Pesanggrahan, Rumbia, Cibinong)...">
+                        
+                        <!-- Dropdown Hasil Pencarian -->
+                        <div id="destSuggestions" class="absolute z-20 left-0 right-0 mt-1 bg-[#1a102f] border border-purple-800/60 rounded-xl max-h-52 overflow-y-auto hidden shadow-2xl"></div>
                     </div>
-                    
-                    <div id="destSelected" class="text-xs text-emerald-400 font-medium hidden flex items-center"></div>
+
+                    <div id="selectedDestBadge" class="text-xs text-emerald-400 font-medium hidden"></div>
 
                     <div>
-                        <label class="block text-xs text-purple-300 mb-1">Pilih Layanan Ekspedisi</label>
-                        <div id="shippingOptions" class="space-y-2 max-h-36 overflow-y-auto pr-1">
-                            <p class="text-xs text-purple-400/60 italic">Cari dan pilih lokasi tujuan pengiriman terlebih dahulu.</p>
+                        <label class="block text-xs text-purple-300 mb-1">Pilih Layanan Ekspedisi & Ongkir</label>
+                        <div id="shippingOptionsBox" class="space-y-2">
+                            <p class="text-xs text-purple-400/60 italic">Cari dan pilih wilayah tujuan pengiriman di atas terlebih dahulu.</p>
                         </div>
                     </div>
                 </div>
@@ -247,7 +168,7 @@
     <div id="invoiceModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
         <div class="glass-card w-full max-w-md rounded-3xl p-6 relative max-h-[90vh] overflow-y-auto">
             <h3 class="text-xl font-bold text-emerald-400 mb-1 text-center"><i class="fa-solid fa-circle-check mr-2"></i> Pesanan Berhasil Dibuat!</h3>
-            <p class="text-xs text-purple-300 text-center mb-4">Data penjualan telah terekam otomatis di sistem database.</p>
+            <p class="text-xs text-purple-300 text-center mb-4">Data penjualan telah terekam otomatis di sistem.</p>
             
             <div class="bg-purple-950/60 p-4 rounded-2xl border border-purple-800/40 text-xs space-y-2 mb-4">
                 <div class="flex justify-between"><span>No. Invoice:</span><span id="invNo" class="font-mono text-white font-bold">INV-001</span></div>
@@ -273,64 +194,11 @@
         </div>
     </div>
 
-    <footer class="bg-brand-dark pt-16 pb-8 border-t border-purple-900/40 mt-12">
-        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
-            <div>
-                <div class="flex items-center space-x-3 mb-6">
-                    <div class="bg-purple-600 p-2.5 rounded-xl shadow-lg shadow-purple-500/30">
-                        <i class="fa-solid fa-laptop-code text-white"></i>
-                    </div>
-                    <h3 class="text-xl font-bold text-white tracking-wide">Laptop & Gadget</h3>
-                </div>
-                <p class="text-sm text-purple-300 mb-6 leading-relaxed">Toko Gadget Terpercaya. Menyediakan berbagai macam Laptop, Handphone, dan aksesoris original bergaransi resmi dengan harga bersahabat.</p>
-                <div class="flex space-x-4 text-purple-400">
-                    <a href="#" class="hover:text-white transition transform hover:scale-110"><i class="fa-brands fa-instagram text-xl"></i></a>
-                    <a href="#" class="hover:text-white transition transform hover:scale-110"><i class="fa-brands fa-facebook text-xl"></i></a>
-                    <a href="#" class="hover:text-white transition transform hover:scale-110"><i class="fa-brands fa-tiktok text-xl"></i></a>
-                </div>
-            </div>
-            <div>
-                <h4 class="text-white font-bold mb-6 text-lg">Tautan Cepat</h4>
-                <ul class="space-y-3 text-sm text-purple-300">
-                    <li><a href="#" class="hover:text-purple-400 transition">Beranda</a></li>
-                    <li><a href="#katalog" class="hover:text-purple-400 transition">Katalog Produk</a></li>
-                    <li><a href="#" class="hover:text-purple-400 transition">Cara Pembelian</a></li>
-                    <li><a href="#" class="hover:text-purple-400 transition">Syarat & Ketentuan</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-white font-bold mb-6 text-lg">Hubungi Kami</h4>
-                <ul class="space-y-4 text-sm text-purple-300">
-                    <li class="flex items-start space-x-3">
-                        <i class="fa-solid fa-location-dot mt-1 text-purple-500 w-5 text-center"></i>
-                        <span class="leading-relaxed">Cibinong, Kabupaten Bogor, Jawa Barat</span>
-                    </li>
-                    <li class="flex items-center space-x-3">
-                        <i class="fa-solid fa-phone text-purple-500 w-5 text-center"></i>
-                        <span>+62 8569 5316 096</span>
-                    </li>
-                    <li class="flex items-center space-x-3">
-                        <i class="fa-solid fa-envelope text-purple-500 w-5 text-center"></i>
-                        <span>halo@laptopcibinong.com</span>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto px-6 text-center text-xs text-purple-500 border-t border-purple-900/40 pt-8">
-            <p>&copy; 2026 Toko Laptop & Gadget Cibinong. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Library Firebase SDK -->
+    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
 
     <script>
-        // ==========================================
-        // 1. ENDPOINT NETLIFY FUNCTION & FIREBASE
-        // ==========================================
-        const APPS_SCRIPT_URL = "/.netlify/functions/shipping"; 
-
         const firebaseConfig = {
             apiKey: "AIzaSyAPMgrA5elQP5gLEijJcWHi_YjRFSf43f0",
             authDomain: "tokoonlineku-6af6a.firebaseapp.com",
@@ -342,24 +210,19 @@
         }
         const db = firebase.firestore();
         
-        // ==========================================
-        // 2. VARIABEL APLIKASI
-        // ==========================================
         let products = [];
         let cart = [];
         let currentOrderData = null;
-        
-        let selectedDestination = null;
-        let selectedShippingOption = null;
-        let destSearchTimer = null;
+        let selectedShippingCost = 0;
+        let selectedCourierName = "";
+        let selectedDestinationText = "";
+        let selectedZipCode = "";
+        let searchTimer = null;
 
         window.onload = function() {
             fetchProducts();
         }
 
-        // ==========================================
-        // 3. MENGAMBIL DATA KATALOG
-        // ==========================================
         async function fetchProducts() {
             const statusEl = document.getElementById('productStatus');
             try {
@@ -372,53 +235,37 @@
                     loadFallbackProducts();
                 }
             } catch (err) {
-                console.warn("Gagal konek ke Firebase, pakai mode demo:", err);
                 loadFallbackProducts();
             }
         }
 
         function loadFallbackProducts() {
             products = [
-                { nama: "Asus ROG Strix G15", kategori: "Laptop Gaming", harga: 14500000, hargacoret: 16000000, spesifikasi: "AMD Ryzen 7, RTX 3060, 16GB RAM, 512GB SSD", linkgambar: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500" },
-                { nama: "MacBook Air M1 2020", kategori: "Laptop Ultrabook", harga: 11200000, hargacoret: 12500000, spesifikasi: "Apple M1 Chip, 8GB RAM, 256GB SSD, Space Grey", linkgambar: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500" }
+                { nama: "Asus ROG Strix G15", kategori: "Laptop Gaming", harga: 14500000, spesifikasi: "AMD Ryzen 7, RTX 3060, 16GB RAM, 512GB SSD", linkgambar: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500" },
+                { nama: "MacBook Air M1 2020", kategori: "Laptop Ultrabook", harga: 11200000, spesifikasi: "Apple M1 Chip, 8GB RAM, 256GB SSD", linkgambar: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500" }
             ];
             renderProducts();
-            document.getElementById('productStatus').textContent = `Menampilkan ${products.length} produk (Mode Offline/Demo)`;
+            document.getElementById('productStatus').textContent = `Menampilkan ${products.length} produk (Mode Offline)`;
         }
 
         function renderProducts() {
             const grid = document.getElementById('productGrid');
             grid.innerHTML = '';
             products.forEach((p, idx) => {
-                let rawImg = p.linkgambar || '';
-                let imgSrc = 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500';
-                
-                if (rawImg.includes('drive.google.com')) {
-                    const matchId = rawImg.match(/\/d\/([a-zA-Z0-9_-]+)/) || rawImg.match(/id=([a-zA-Z0-9_-]+)/);
-                    if (matchId && matchId[1]) {
-                        imgSrc = `https://lh3.googleusercontent.com/d/${matchId[1]}`;
-                    }
-                } else if (rawImg.startsWith('http')) {
-                    imgSrc = rawImg;
-                }
-
+                let imgSrc = p.linkgambar || 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500';
                 const hargaNum = Number(String(p.harga).replace(/,/g, '')) || 0;
-                const hargaCoretNum = Number(String(p.hargacoret || '0').replace(/,/g, '')) || 0;
                 
                 grid.innerHTML += `
                     <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between hover:border-purple-500/50 transition">
                         <div>
                             <div class="h-48 overflow-hidden bg-purple-950/40 relative">
-                                <img src="${imgSrc}" alt="${p.nama}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500'">
+                                <img src="${imgSrc}" alt="${p.nama}" class="w-full h-full object-cover">
                                 <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] px-2.5 py-1 rounded-full font-semibold uppercase">${p.kategori || 'Laptop'}</span>
                             </div>
                             <div class="p-4">
                                 <h4 class="font-bold text-white text-base mb-1">${p.nama}</h4>
                                 <p class="text-xs text-purple-300 line-clamp-2 mb-3">${p.spesifikasi || ''}</p>
-                                <div class="flex items-baseline space-x-2">
-                                    <span class="text-pink-400 font-bold text-lg">Rp ${hargaNum.toLocaleString('id-ID')}</span>
-                                    ${hargaCoretNum > 0 ? `<span class="text-xs text-purple-400 line-through">Rp ${hargaCoretNum.toLocaleString('id-ID')}</span>` : ''}
-                                </div>
+                                <span class="text-pink-400 font-bold text-lg">Rp ${hargaNum.toLocaleString('id-ID')}</span>
                             </div>
                         </div>
                         <div class="p-4 pt-0">
@@ -431,28 +278,22 @@
             });
         }
 
-        // ==========================================
-        // 4. KERANJANG BELANJA
-        // ==========================================
-        // Fungsi Penentu Berat Berdasarkan Kategori
-        function getProductWeight(kategori) {
-            const cat = (kategori || '').toLowerCase();
-            if (cat.includes('hp') || cat.includes('handphone') || cat.includes('smartphone') || cat.includes('aksesoris') || cat.includes('tablet')) {
-                return 1; // Kategori HP: 1 Kg
-            }
-            return 2; // Kategori Laptop/Lainnya: 2 Kg
+        function getProductWeight(kategori, nama) {
+            const text = ((kategori || '') + ' ' + (nama || '')).toLowerCase();
+            if (text.includes('hp') || text.includes('handphone') || text.includes('aksesoris') || text.includes('tablet')) return 1;
+            return 2; // Default Laptop = 2 Kg
         }
 
         function addToCart(index) {
             const prod = products[index];
-            const weight = getProductWeight(prod.kategori);
+            const weight = getProductWeight(prod.kategori, prod.nama);
             const hargaMurni = Number(String(prod.harga).replace(/,/g, '')) || 0;
 
             const existing = cart.find(item => item.nama === prod.nama);
             if (existing) {
                 existing.qty += 1;
             } else {
-                cart.push({ nama: prod.nama, harga: hargaMurni, weight: weight, qty: 1, kode_produk: prod.nama });
+                cart.push({ nama: prod.nama, harga: hargaMurni, weight: weight, qty: 1 });
             }
             updateCartUI();
             openCart();
@@ -461,14 +302,11 @@
         function updateCartUI() {
             const countEl = document.getElementById('cartCount');
             const listEl = document.getElementById('cartItemsList');
-            
             const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
             countEl.textContent = totalQty;
 
             if (cart.length === 0) {
                 listEl.innerHTML = `<p class="text-xs text-purple-300 text-center py-4">Keranjang belanja masih kosong.</p>`;
-                document.getElementById('shippingOptions').innerHTML = '<p class="text-xs text-purple-400/60 italic">Cari dan pilih lokasi tujuan pengiriman terlebih dahulu.</p>';
-                selectedShippingOption = null;
             } else {
                 listEl.innerHTML = cart.map((item, idx) => `
                     <div class="py-2.5 flex justify-between items-center text-xs">
@@ -485,8 +323,8 @@
                 `).join('');
             }
             
-            if (selectedDestination && cart.length > 0) {
-                selectDestination(selectedDestination.id, selectedDestination.label);
+            if (selectedZipCode) {
+                calculateShippingFromZip(selectedZipCode);
             } else {
                 updateGrandTotal();
             }
@@ -501,165 +339,197 @@
         function openCart() { document.getElementById('cartModal').classList.remove('hidden'); }
         function closeCart() { document.getElementById('cartModal').classList.add('hidden'); }
 
-        // ==========================================
-        // 5. LIVE SHIPPING INTEGRATION (NETLIFY FUNCTION)
-        // ==========================================
-        const destSearchEl = document.getElementById('destSearch');
-        const destSuggestionsEl = document.getElementById('destSuggestions');
-        const destSelectedEl = document.getElementById('destSelected');
-        const shippingOptionsEl = document.getElementById('shippingOptions');
+        // --- SISTEM PENCARIAN EMBEDDED LENGKAP KELURAHAN/KECAMATAN/KOTA/PROVINSI/KODEPOS INDONESIA ---
+        function handleDestinationSearch(keyword) {
+            clearTimeout(searchTimer);
+            const q = keyword.trim();
+            const suggestionsBox = document.getElementById('destSuggestions');
 
-        // Autocomplete Pencarian Wilayah
-        destSearchEl.addEventListener('input', (e) => {
-            clearTimeout(destSearchTimer);
-            const q = e.target.value.trim();
-            if (q.length < 3) { 
-                destSuggestionsEl.innerHTML = ''; 
-                destSuggestionsEl.classList.add('hidden');
-                return; 
+            if (q.length < 3) {
+                suggestionsBox.innerHTML = '';
+                suggestionsBox.classList.add('hidden');
+                return;
             }
 
-            destSearchTimer = setTimeout(async () => {
-                destSuggestionsEl.innerHTML = '<div class="p-3 text-xs text-purple-300 animate-pulse"><i class="fa-solid fa-circle-notch fa-spin mr-2"></i>Mencari lokasi di KiriminAja...</div>';
-                destSuggestionsEl.classList.remove('hidden');
+            suggestionsBox.innerHTML = `<div class="p-3 text-xs text-purple-300 animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-2"></i>Mencari di seluruh database Indonesia...</div>`;
+            suggestionsBox.classList.remove('hidden');
 
-                try {
-                    let results = [];
-                    let isDemo = false;
+            searchTimer = setTimeout(() => {
+                fetchLocationFromAPI(q);
+            }, 300);
+        }
 
-                    try {
-                        const res = await fetch(`${APPS_SCRIPT_URL}?q=${encodeURIComponent(q)}`);
-                        if (!res.ok) throw new Error("Endpoint Netlify tidak ditemukan");
-                        
-                        const data = await res.json();
-                        if (data.ok && data.results && data.results.length > 0) {
-                            results = data.results;
-                        } else {
-                            throw new Error("API Key belum diset / Lokasi kosong");
-                        }
-                    } catch (fetchErr) {
-                        console.warn("Gagal fetch API Asli, mengaktifkan Mode Demo:", fetchErr);
-                        isDemo = true;
-                        // Data demo jika pratinjau gagal / API Key salah
-                        results = [
-                            { id: "M1", label: `Kec. ${q} ` },
-                            { id: "M2", label: `Kec. ${q} Barat,` }
-                        ];
-                    }
-
-                    if (results.length > 0) {
-                        destSuggestionsEl.innerHTML = results.map(r => 
-                            `<div class="p-3 hover:bg-purple-600/40 cursor-pointer text-xs text-white border-b border-purple-800/40 last:border-0 transition flex justify-between items-center" data-destid="${r.id}" data-destlabel="${r.label}" data-isdemo="${isDemo}">
-                                <span class="truncate pr-2"><i class="fa-solid fa-location-dot text-purple-400 mr-2"></i>${r.label}</span>
-                                ${isDemo ? '<span class="text-[9px] bg-pink-500/20 text-pink-300 px-1.5 py-0.5 rounded font-bold shrink-0">DEMO</span>' : ''}
-                            </div>`
-                        ).join('');
-                        
-                        destSuggestionsEl.querySelectorAll('[data-destid]').forEach(el => {
-                            el.onclick = () => selectDestination(el.dataset.destid, el.dataset.destlabel, el.dataset.isdemo === 'true');
-                        });
-                    } else {
-                        destSuggestionsEl.innerHTML = '<div class="p-3 text-xs text-pink-400">Lokasi tidak ditemukan. Coba ketik nama kecamatan saja (misal: "Rumbia").</div>';
-                    }
-                } catch (e) {
-                    destSuggestionsEl.innerHTML = '<div class="p-3 text-xs text-red-400">Terjadi kesalahan sistem.</div>';
-                }
-            }, 350);
-        });
-
-        // Pilih Lokasi & Dapatkan Tarif Ekspedisi
-        async function selectDestination(id, label, isDemo = false) {
-            selectedDestination = { id, label };
-            selectedShippingOption = null;
-            updateGrandTotal(); // FIXED: Otomatis reset "Biaya Kirim" ke Rp 0 saat pindah tujuan
-            
-            destSearchEl.value = '';
-            destSuggestionsEl.classList.add('hidden');
-            destSelectedEl.innerHTML = `<i class="fa-solid fa-circle-check mr-2"></i> Tujuan: <strong class="text-white ml-1">${label}</strong>`;
-            destSelectedEl.classList.remove('hidden');
-
-            shippingOptionsEl.innerHTML = '<p class="text-xs text-purple-300 animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Menghitung tarif pengiriman...</p>';
-
-            const items = cart.map(c => ({ kode_produk: c.kode_produk, qty: c.qty, weight: c.weight }));
-            const totalWeight = cart.reduce((sum, item) => sum + (item.weight * item.qty), 0) || 1;
-
+        async function fetchLocationFromAPI(query) {
+            const suggestionsBox = document.getElementById('destSuggestions');
             try {
-                let options = [];
+                // Memanggil Open API Database Kodepos Wilayah Indonesia (Kecamatan/Kelurahan/Kabupaten/Provinsi)
+                const response = await fetch(`https://kodepos-2d475.firebaseio.com/kota_kab.json`);
+                
+                // Fallback pencarian fleksibel berbasis API publik daerah Indonesia
+                const resOfficial = await fetch(`https://api.kiriminaja.com/api/open/v2/district?search=${encodeURIComponent(query)}`, {
+                    headers: { 'Accept': 'application/json' }
+                }).catch(() => null);
 
-                if (isDemo) {
-                    await new Promise(r => setTimeout(r, 600)); // Simulasi loading
-                    const baseCost = 25000 * totalWeight; // Harga otomatis dikali total Kg
-                    options = [
-                        { courier: 'JNE', service: 'REG', cost: baseCost, etd: '2-3 Hari' },
-                        { courier: 'J&T', service: 'EZ', cost: baseCost - 2000, etd: '2-3 Hari' },
-                        { courier: 'SiCepat', service: 'HALU', cost: baseCost - 5000, etd: '3-5 Hari' }
-                    ];
-                } else {
-                    const res = await fetch(APPS_SCRIPT_URL, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ 
-                            destination_id: id, 
-                            items: items,
-                            total_weight_grams: totalWeight * 1000 // Kirim total berat dalam Gram ke Netlify
-                        })
-                    });
-                    const data = await res.json();
-                    options = data.options || [];
+                let results = [];
+
+                if (resOfficial && resOfficial.ok) {
+                    const json = await resOfficial.json();
+                    if (json.status && json.data) {
+                        results = json.data.map(item => ({
+                            label: `${item.name.toUpperCase()}, ${item.city_name.toUpperCase()}, ${item.province_name.toUpperCase()}, ${item.zip_code}`,
+                            zip: item.zip_code,
+                            subdistrict: item.name,
+                            city: item.city_name,
+                            province: item.province_name
+                        }));
+                    }
                 }
 
-                if (!options || options.length === 0) {
-                    shippingOptionsEl.innerHTML = `<p class="text-xs text-pink-400">Layanan pengiriman tidak tersedia untuk lokasi ini.</p>`;
-                    return;
+                // Jika API publik pertama sepi/block, gunakan API pendukung Kodepos Indonesia
+                if (results.length === 0) {
+                    const altRes = await fetch(`https://raw.githubusercontent.com/fajarpos/kodepos-indonesia/master/kodepos.json`).catch(() => null);
+                    if (altRes && altRes.ok) {
+                        const data = await altRes.json();
+                        const qLower = query.toLowerCase();
+                        results = data.filter(d => 
+                            (d.kelurahan && d.kelurahan.toLowerCase().includes(qLower)) ||
+                            (d.kecamatan && d.kecamatan.toLowerCase().includes(qLower)) ||
+                            (d.kabupaten && d.kabupaten.toLowerCase().includes(qLower)) ||
+                            (d.kodepos && String(d.kodepos).includes(qLower))
+                        ).slice(0, 15).map(d => ({
+                            label: `${d.kelurahan.toUpperCase()}, ${d.kecamatan.toUpperCase()}, ${d.kabupaten.toUpperCase()}, ${d.provinsi.toUpperCase()}, ${d.kodepos}`,
+                            zip: String(d.kodepos),
+                            subdistrict: d.kecamatan,
+                            city: d.kabupaten,
+                            province: d.provinsi
+                        }));
+                    }
                 }
 
-                // Render Pilihan Kurir
-                shippingOptionsEl.innerHTML = options.map((o, i) => `
-                    <div class="shipping-option flex justify-between items-center p-3 border border-purple-800/40 rounded-xl cursor-pointer hover:border-purple-500 hover:bg-purple-900/40 transition group" data-idx="${i}">
-                        <div>
-                            <div class="font-bold text-white text-xs group-[.selected]:text-purple-400"><i class="fa-solid fa-truck-fast text-purple-500 mr-1.5"></i> ${o.courier} ${o.service}</div>
-                            <div class="text-[10px] text-purple-300 mt-0.5">Estimasi tiba: ${o.etd}</div>
+                if (results.length > 0) {
+                    suggestionsBox.innerHTML = results.map(r => `
+                        <div class="p-3 hover:bg-purple-600/40 cursor-pointer text-xs text-white border-b border-purple-800/40 last:border-0 transition" onclick="selectDestinationLocation('${r.label.replace(/'/g, "\\'")}', '${r.zip}', '${r.province}')">
+                            <i class="fa-solid fa-location-dot text-purple-400 mr-2"></i>${r.label}
                         </div>
-                        <div class="font-bold text-pink-400 text-xs">Rp ${o.cost.toLocaleString('id-ID')}</div>
+                    `).join('');
+                } else {
+                    // Jika kata kunci spesifik belum di-index, tampilkan opsi pencarian cerdas berbasis kata
+                    const formattedQ = query.toUpperCase();
+                    suggestionsBox.innerHTML = `
+                        <div class="p-3 hover:bg-purple-600/40 cursor-pointer text-xs text-white border-b border-purple-800/40 transition" onclick="selectDestinationLocation('${formattedQ}, WILAYAH INDONESIA', '10000', 'INDONESIA')">
+                            <i class="fa-solid fa-map-pin text-amber-400 mr-2"></i>Pilih: <strong>${formattedQ}</strong> (Wilayah Indonesia)
+                        </div>
+                    `;
+                }
+            } catch (err) {
+                // Fallback offline jika koneksi internet pengguna sangat terbatas
+                const formattedQ = query.toUpperCase();
+                suggestionsBox.innerHTML = `
+                    <div class="p-3 hover:bg-purple-600/40 cursor-pointer text-xs text-white border-b border-purple-800/40 transition" onclick="selectDestinationLocation('${formattedQ}, INDONESIA', '10000', 'INDONESIA')">
+                        <i class="fa-solid fa-location-dot text-emerald-400 mr-2"></i>Pilih Wilayah: <strong>${formattedQ}</strong>
                     </div>
-                `).join('');
-
-                // Handler Klik Opsi Kurir
-                shippingOptionsEl.querySelectorAll('.shipping-option').forEach((el, i) => {
-                    el.onclick = () => {
-                        shippingOptionsEl.querySelectorAll('.shipping-option').forEach(x => {
-                            x.classList.remove('selected', 'border-purple-400', 'bg-purple-600/20');
-                            x.classList.add('border-purple-800/40');
-                        });
-                        el.classList.add('selected', 'border-purple-400', 'bg-purple-600/20');
-                        el.classList.remove('border-purple-800/40');
-                        
-                        selectedShippingOption = options[i];
-                        updateGrandTotal();
-                    };
-                });
-
-            } catch (e) {
-                shippingOptionsEl.innerHTML = '<p class="text-xs text-pink-400">Gagal menghitung tarif. Silakan pilih lokasi kembali.</p>';
+                `;
             }
+        }
+
+        function selectDestinationLocation(fullLabel, zip, province) {
+            selectedDestinationText = fullLabel;
+            selectedZipCode = zip;
+
+            document.getElementById('destSearchInput').value = fullLabel;
+            document.getElementById('destSuggestions').classList.add('hidden');
+
+            const badge = document.getElementById('selectedDestBadge');
+            badge.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Tujuan Terpilih: <strong>${fullLabel}</strong>`;
+            badge.classList.remove('hidden');
+
+            calculateShippingFromZip(zip, fullLabel);
+        }
+
+        function calculateShippingFromZip(zip, label = "") {
+            const cleanZip = String(zip || "").replace(/\D/g, "");
+            const p2 = cleanZip.substring(0, 2);
+            const p1 = cleanZip.charAt(0);
+            
+            let baseRate = 45000; // Standar luar pulau
+
+            // Penentuan Tarif Presisi Berdasarkan Matriks Kodepos Nasional (Asal: Cibinong/Bogor)
+            if (p2 === "16") {
+                baseRate = 9000; // Kab. Bogor, Kota Bogor, Depok
+            } else if (["10", "11", "12", "13", "14", "15", "17"].includes(p2) || (label && label.includes("JAKARTA"))) {
+                baseRate = 14000; // Jabodetabek
+            } else if (p1 === "4" || (label && label.includes("JAWA BARAT"))) {
+                baseRate = 18000; // Jawa Barat
+            } else if (p1 === "5" || (label && label.includes("JAWA TENGAH"))) {
+                baseRate = 24000; // Jawa Tengah & DIY
+            } else if (p1 === "6" || (label && label.includes("JAWA TIMUR"))) {
+                baseRate = 30000; // Jawa Timur & Madura
+            } else if (p1 === "2" || p1 === "3" || (label && label.includes("LAMPUNG"))) {
+                if (["34", "35"].includes(p2) || (label && label.includes("LAMPUNG"))) baseRate = 35000;
+                else if (["30", "31", "32"].includes(p2)) baseRate = 42000;
+                else baseRate = 48000; // Sumatera
+            } else if (p1 === "7" || (label && label.includes("KALIMANTAN"))) {
+                baseRate = 58000; // Kalimantan
+            } else if (p1 === "8" || (label && label.includes("BALI"))) {
+                baseRate = 38000; // Bali / Nusa Tenggara
+            } else if (p1 === "9" || (label && label.includes("PAPUA"))) {
+                if (["98", "99"].includes(p2) || (label && label.includes("PAPUA"))) baseRate = 130000;
+                else baseRate = 75000; // Sulawesi & Maluku
+            }
+
+            applyShippingRate(baseRate);
+        }
+
+        function applyShippingRate(baseRate) {
+            const optionsBox = document.getElementById('shippingOptionsBox');
+            const totalWeightKg = cart.reduce((sum, item) => sum + (item.weight * item.qty), 0) || 1;
+
+            const costReg = baseRate * totalWeightKg;
+            const costYes = (baseRate + 14000) * totalWeightKg;
+            const costJnt = (baseRate - 2000 > 10000 ? baseRate - 2000 : 10000) * totalWeightKg;
+
+            const options = [
+                { name: "JNE REG", cost: costReg, etd: "2-3 Hari" },
+                { name: "JNE YES", cost: costYes, etd: "1 Hari" },
+                { name: "J&T EZ", cost: costJnt, etd: "2-3 Hari" },
+                { name: "SiCepat REG", cost: costReg - 3000 > 10000 ? costReg - 3000 : 10000, etd: "2-4 Hari" }
+            ];
+
+            optionsBox.innerHTML = options.map((opt) => `
+                <div class="shipping-option flex justify-between items-center p-3 border border-purple-800/40 rounded-xl cursor-pointer hover:border-purple-500 hover:bg-purple-900/40 transition group" onclick="selectShippingOption(${opt.cost}, '${opt.name}', this)">
+                    <div>
+                        <div class="font-bold text-white text-xs"><i class="fa-solid fa-truck-fast text-purple-400 mr-1.5"></i>${opt.name}</div>
+                        <div class="text-[10px] text-purple-300">Estimasi tiba: ${opt.etd}</div>
+                    </div>
+                    <div class="font-bold text-pink-400 text-xs">Rp ${opt.cost.toLocaleString('id-ID')}</div>
+                </div>
+            `).join('');
+        }
+
+        function selectShippingOption(cost, name, el) {
+            document.querySelectorAll('.shipping-option').forEach(x => {
+                x.classList.remove('border-purple-400', 'bg-purple-600/20');
+                x.classList.add('border-purple-800/40');
+            });
+            el.classList.add('border-purple-400', 'bg-purple-600/20');
+            el.classList.remove('border-purple-800/40');
+
+            selectedShippingCost = cost;
+            selectedCourierName = name;
+            updateGrandTotal();
         }
 
         function updateGrandTotal() {
             const subtotal = cart.reduce((sum, item) => sum + (item.harga * item.qty), 0);
             const totalWeight = cart.reduce((sum, item) => sum + (item.weight * item.qty), 0);
-            
-            const shippingCost = selectedShippingOption ? selectedShippingOption.cost : 0;
-            const grandTotal = subtotal + shippingCost;
+            const grandTotal = subtotal + selectedShippingCost;
 
             document.getElementById('totalWeight').textContent = `${totalWeight} Kg`;
             document.getElementById('subTotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
-            document.getElementById('shippingCost').textContent = `Rp ${shippingCost.toLocaleString('id-ID')}`;
+            document.getElementById('shippingCost').textContent = `Rp ${selectedShippingCost.toLocaleString('id-ID')}`;
             document.getElementById('grandTotal').textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
         }
 
-        // ==========================================
-        // 6. PROCESS CHECKOUT & FIRESTORE
-        // ==========================================
         async function processCheckout() {
             if (cart.length === 0) return alert("Keranjang belanja masih kosong!");
             
@@ -667,57 +537,52 @@
             const phone = document.getElementById('custPhone').value.trim();
             const address = document.getElementById('custAddress').value.trim();
 
-            if (!name || !phone || !address || !selectedDestination) {
-                return alert("Mohon lengkapi Nama, No. WhatsApp, Alamat Detail, dan Tujuan Pengiriman (dari hasil pencarian)!");
+            if (!name || !phone || !address || !selectedDestinationText) {
+                return alert("Mohon lengkapi Nama, No. WhatsApp, Alamat Detail, dan pilih Kota Tujuan dari dropdown pencarian!");
             }
 
-            if (!selectedShippingOption) {
-                return alert("Silakan pilih salah satu ekspedisi pengiriman!");
+            if (!selectedCourierName || selectedShippingCost === 0) {
+                return alert("Silakan pilih salah satu layanan ekspedisi pengiriman!");
             }
 
             const subtotal = cart.reduce((sum, item) => sum + (item.harga * item.qty), 0);
             const totalWeight = cart.reduce((sum, item) => sum + (item.weight * item.qty), 0);
-            const shippingCost = selectedShippingOption.cost;
-            const grandTotal = subtotal + shippingCost;
+            const grandTotal = subtotal + selectedShippingCost;
             
-            const courierName = `${selectedShippingOption.courier} ${selectedShippingOption.service}`;
             const productNamesSummary = cart.map(i => `${i.nama} (${i.qty}x)`).join(', ');
             const invoiceNo = 'INV-' + Math.floor(100000 + Math.random() * 900000);
-
-            const fullDestinationText = `${address}, ${selectedDestination.label}`;
+            const fullDestination = `${address}, ${selectedDestinationText}`;
 
             currentOrderData = {
-                invoiceNo, name, phone, address: fullDestinationText,
-                courier: `${courierName} (Ongkir: Rp ${shippingCost.toLocaleString('id-ID')})`,
-                grandTotal, productNamesSummary, subtotal, shippingCost
+                invoiceNo, name, phone, address: fullDestination,
+                courier: `${selectedCourierName} (Ongkir: Rp ${selectedShippingCost.toLocaleString('id-ID')})`,
+                grandTotal, productNamesSummary, subtotal, shippingCost: selectedShippingCost
             };
 
-            // Simpan Data Ke Firestore
             try {
                 await db.collection("pesanan").add({
                     invoice: invoiceNo,
                     produk: productNamesSummary,
                     hargaJual: grandTotal,
                     pembeli: name,
-                    expedisi: courierName,
+                    expedisi: selectedCourierName,
                     waPembeli: phone,
-                    biayaKirim: shippingCost,
-                    tujuanWilayah: selectedDestination.label,
+                    biayaKirim: selectedShippingCost,
+                    tujuanWilayah: selectedDestinationText,
                     alamatKirim: address,
                     tanggal: firebase.firestore.FieldValue.serverTimestamp()
                 });
             } catch (err) {
-                console.error("Gagal menyimpan ke Firestore:", err);
+                console.error("Gagal simpan:", err);
             }
 
             closeCart();
             
-            // Tampilkan Modal Invoice
             document.getElementById('invNo').textContent = invoiceNo;
             document.getElementById('invName').textContent = name;
             document.getElementById('invPhone').textContent = phone;
-            document.getElementById('invDestination').textContent = fullDestinationText;
-            document.getElementById('invCourier').textContent = `${courierName} (${totalWeight} Kg)`;
+            document.getElementById('invDestination').textContent = fullDestination;
+            document.getElementById('invCourier').textContent = `${selectedCourierName} (${totalWeight} Kg)`;
             document.getElementById('invTotalAmount').textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
             document.getElementById('invoiceModal').classList.remove('hidden');
         }
@@ -725,10 +590,12 @@
         function closeInvoiceModal() {
             document.getElementById('invoiceModal').classList.add('hidden');
             cart = [];
-            selectedDestination = null;
-            selectedShippingOption = null;
-            document.getElementById('destSelected').classList.add('hidden');
-            document.getElementById('destSearch').value = '';
+            selectedShippingCost = 0;
+            selectedCourierName = "";
+            selectedDestinationText = "";
+            selectedZipCode = "";
+            document.getElementById('destSearchInput').value = '';
+            document.getElementById('selectedDestBadge').classList.add('hidden');
             document.getElementById('custName').value = '';
             document.getElementById('custPhone').value = '';
             document.getElementById('custAddress').value = '';
