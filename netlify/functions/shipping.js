@@ -1,6 +1,7 @@
 exports.handler = async (event, context) => {
   const apiKey = process.env.KIRIMINAJA_API_KEY;
-  const originId = process.env.ORIGIN_DISTRICT_ID || "5822"; // ID Asal Toko
+  // Pastikan ORIGIN_DISTRICT_ID adalah ID Kecamatan resmi dari database KiriminAja (Cibinong = 5822)
+  const originId = process.env.ORIGIN_DISTRICT_ID || "5822";
 
   const headers = {
     "Access-Control-Allow-Origin": "*",
@@ -13,7 +14,7 @@ exports.handler = async (event, context) => {
   }
 
   try {
-    // 1. Pencarian Lokasi (GET)
+    // 1. Pencarian Lokasi / Kecamatan (GET)
     if (event.httpMethod === "GET") {
       const query = event.queryStringParameters.q || "";
       if (query.length < 3) return { statusCode: 200, headers, body: JSON.stringify({ ok: true, results: [] }) };
@@ -33,42 +34,44 @@ exports.handler = async (event, context) => {
       return { statusCode: 200, headers, body: JSON.stringify({ ok: false, results: [] }) };
     }
 
-    // 2. Hitung Ongkir (POST)
+    // 2. Hitung Ongkir Real (POST)
     if (event.httpMethod === "POST") {
       const data = JSON.parse(event.body || "{}");
       const { destination_id, items, total_weight_grams } = data;
 
-      // KALKULASI BERAT DI BACKEND (Mencegah tidak akurat & manipulasi)
+      // Kalkulasi akurat total berat dalam gram
       let calculatedWeightGrams = 0;
-      
+      let totalItemValue = 0; // Estimasi nilai barang untuk kalkulasi asuransi/layanan komersial
+
       if (items && Array.isArray(items) && items.length > 0) {
         items.forEach(item => {
-          let weightPerItem = 2; // Default jika tidak diketahui adalah Laptop (2 Kg)
-          
-          // Jika Frontend mengirim parameter weight, gunakan itu
-          if (item.weight !== undefined && item.weight !== null) {
-            weightPerItem = Number(item.weight);
+          let weightKg = 2; // Default Laptop = 2 Kg
+          if (item.weight !== undefined && item.weight !== null && !isNaN(item.weight)) {
+            weightKg = Number(item.weight);
           } else {
-            // Analisa otomatis berdasarkan kode/nama jika tidak dikirim spesifik (HP=1kg)
-            const identitas = ((item.kode_produk || '') + ' ' + (item.nama || '')).toLowerCase();
-            if (identitas.includes('hp') || identitas.includes('handphone') || identitas.includes('aksesoris')) {
-              weightPerItem = 1;
+            const textCheck = ((item.nama || '') + ' ' + (item.kategori || '') + ' ' + (item.kode_produk || '')).toLowerCase();
+            if (textCheck.includes('hp') || textCheck.includes('handphone') || textCheck.includes('aksesoris')) {
+              weightKg = 1;
             }
           }
+          const qty = Number(item.qty) || 1;
+          calculatedWeightGrams += (weightKg * 1000 * qty);
           
-          // Akumulasikan: Berat per item x Kuantitas x 1000 (ubah ke Gram)
-          calculatedWeightGrams += (weightPerItem * 1000 * (item.qty || 1));
+          // Akumulasi harga barang jika ada
+          const hargaSatuan = Number(item.harga) || 1500000;
+          totalItemValue += (hargaSatuan * qty);
         });
       }
 
-      // Pastikan minimal berat adalah 1000 Gram (1 Kg)
       const finalWeight = calculatedWeightGrams > 0 ? calculatedWeightGrams : (total_weight_grams || 1000);
 
+      // Payload standar V2 KiriminAja yang mencakup parameter jarak & nilai barang
       const payload = {
-        origin: String(originId), // KiriminAja V2 mewajibkan String, bukan Number
+        origin: String(originId),
         destination: String(destination_id),
-        weight: finalWeight, 
-        courier: "jne,jnt,sicepat,anteraja,ninja,ide" // Penambahan kurir alternatif
+        weight: finalWeight,
+        item_value: totalItemValue > 0 ? totalItemValue : 1000000, 
+        courier: "jne,jnt,sicepat,anteraja"
       };
 
       const res = await fetch("https://api.kiriminaja.com/api/open/v2/shipping_price", {
@@ -83,15 +86,17 @@ exports.handler = async (event, context) => {
       const json = await res.json();
 
       if (json.status && json.data && json.data.results) {
+        // Mapping langsung tarif real yang dikembalikan oleh server KiriminAja
         const options = json.data.results.map(item => ({
           courier: item.courier.toUpperCase(),
           service: item.service,
-          cost: item.cost,
+          cost: Number(item.cost), // Pastikan format angka murni
           etd: item.etd || "1-3 Hari"
         }));
         return { statusCode: 200, headers, body: JSON.stringify({ ok: true, options }) };
       }
-      return { statusCode: 200, headers, body: JSON.stringify({ ok: false, message: json.message || "Kurir belum mencakup wilayah ini." }) };
+
+      return { statusCode: 200, headers, body: JSON.stringify({ ok: false, message: json.message || "Tarif ekspedisi tidak tersedia untuk rute ini." }) };
     }
   } catch (err) {
     return { statusCode: 500, headers, body: JSON.stringify({ ok: false, message: err.message }) };
