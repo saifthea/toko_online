@@ -434,10 +434,18 @@
         // ==========================================
         // 4. KERANJANG BELANJA
         // ==========================================
+        // Fungsi Penentu Berat Berdasarkan Kategori
+        function getProductWeight(kategori) {
+            const cat = (kategori || '').toLowerCase();
+            if (cat.includes('hp') || cat.includes('handphone') || cat.includes('smartphone') || cat.includes('aksesoris') || cat.includes('tablet')) {
+                return 1; // Kategori HP: 1 Kg
+            }
+            return 2; // Kategori Laptop/Lainnya: 2 Kg
+        }
+
         function addToCart(index) {
             const prod = products[index];
-            const cat = (prod.kategori || '').toLowerCase();
-            const weight = cat.includes('hp') || cat.includes('handphone') || cat.includes('aksesoris') ? 1 : 2;
+            const weight = getProductWeight(prod.kategori);
             const hargaMurni = Number(String(prod.harga).replace(/,/g, '')) || 0;
 
             const existing = cart.find(item => item.nama === prod.nama);
@@ -563,6 +571,7 @@
         async function selectDestination(id, label, isDemo = false) {
             selectedDestination = { id, label };
             selectedShippingOption = null;
+            updateGrandTotal(); // FIXED: Otomatis reset "Biaya Kirim" ke Rp 0 saat pindah tujuan
             
             destSearchEl.value = '';
             destSuggestionsEl.classList.add('hidden');
@@ -571,25 +580,29 @@
 
             shippingOptionsEl.innerHTML = '<p class="text-xs text-purple-300 animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Menghitung tarif pengiriman...</p>';
 
-            const items = cart.map(c => ({ kode_produk: c.kode_produk, qty: c.qty }));
+            const items = cart.map(c => ({ kode_produk: c.kode_produk, qty: c.qty, weight: c.weight }));
             const totalWeight = cart.reduce((sum, item) => sum + (item.weight * item.qty), 0) || 1;
 
             try {
                 let options = [];
 
                 if (isDemo) {
-                    await new Promise(r => setTimeout(r, 600)); // Simulasi loading untuk mode demo
-                    const baseCost = 15000 * totalWeight;
+                    await new Promise(r => setTimeout(r, 600)); // Simulasi loading
+                    const baseCost = 25000 * totalWeight; // Harga otomatis dikali total Kg
                     options = [
                         { courier: 'JNE', service: 'REG', cost: baseCost, etd: '2-3 Hari' },
-                        { courier: 'J&T', service: 'EZ', cost: baseCost - 1000, etd: '2-3 Hari' },
-                        { courier: 'SiCepat', service: 'HALU', cost: baseCost - 3000, etd: '3-5 Hari' }
+                        { courier: 'J&T', service: 'EZ', cost: baseCost - 2000, etd: '2-3 Hari' },
+                        { courier: 'SiCepat', service: 'HALU', cost: baseCost - 5000, etd: '3-5 Hari' }
                     ];
                 } else {
                     const res = await fetch(APPS_SCRIPT_URL, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ destination_id: id, items: items })
+                        body: JSON.stringify({ 
+                            destination_id: id, 
+                            items: items,
+                            total_weight_grams: totalWeight * 1000 // Kirim total berat dalam Gram ke Netlify
+                        })
                     });
                     const data = await res.json();
                     options = data.options || [];
