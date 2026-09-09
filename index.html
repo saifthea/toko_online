@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toko Laptop Cibinong - Katalog & Pemesanan Online</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: { dark: '#0b0415', card: '#1a102f', accent: '#7c3aed', glow: '#9333ea' }
+                    },
+                    fontFamily: { sans: ['Inter', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { background-color: #0b0415; color: #f3f4f6; }
+        .glass-card { background: rgba(26, 16, 47, 0.75); backdrop-filter: blur(12px); border: 1px solid rgba(147, 51, 234, 0.2); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col font-sans">
+
+    <header class="sticky top-0 z-50 glass-card border-b border-purple-900/40 py-4 px-6">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-purple-600 p-2.5 rounded-xl shadow-lg shadow-purple-500/30">
+                    <i class="fa-solid fa-laptop-code text-white text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="text-lg font-bold tracking-wide text-white">Laptop & Gadget Cibinong</h1>
+                    <p class="text-xs text-purple-300">Pusat Jual Beli Laptop & HP Berkualitas</p>
+                </div>
+            </div>
+
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-purple-200">
+                <a href="#" class="hover:text-white transition">Beranda</a>
+                <a href="#katalog" class="hover:text-white transition">Produk</a>
+                <a href="#testimoni" class="hover:text-white transition">Testimoni</a>
+            </nav>
+
+            <div class="flex items-center space-x-4">
+                <button onclick="openCart()" class="relative bg-purple-600 hover:bg-purple-500 text-white px-4 py-2 rounded-xl text-sm font-medium transition flex items-center space-x-2 shadow-md shadow-purple-600/30">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <span>Keranjang</span>
+                    <span id="cartCount" class="absolute -top-2 -right-2 bg-pink-600 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-6 py-12 lg:py-20 flex flex-col lg:flex-row items-center gap-12">
+        <!-- Kolom Teks -->
+        <div class="w-full lg:w-1/2 text-left">
+            <div class="inline-block bg-purple-900/60 border border-purple-700/50 text-purple-300 text-[10px] sm:text-xs font-bold px-3 py-1.5 rounded-full mb-6 uppercase tracking-wider">
+                Promo Spesial Bulan Ini
+            </div>
+            
+            <h2 class="text-4xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
+                Upgrade Gadgetmu,<br>
+                <span class="text-purple-400">Tanpa Bikin Kering Kantong!</span>
+            </h2>
+            
+            <p class="text-purple-200 text-base md:text-lg mb-8 max-w-xl leading-relaxed">
+                Temukan koleksi Laptop dan HP berkualitas dengan harga terbaik. Bergaransi, original, dan banyak bonus menanti Anda!
+            </p>
+            
+            <div class="flex flex-wrap gap-4 mb-10">
+                <a href="#katalog" class="bg-purple-600 hover:bg-purple-500 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg transition flex items-center gap-2">
+                    <span>Lihat Katalog</span>
+                    <i class="fa-solid fa-arrow-down text-sm"></i>
+                </a>
+                <a href="https://wa.me/6285695316096" target="_blank" class="bg-green-500 hover:bg-green-400 text-white font-semibold px-6 py-3.5 rounded-xl shadow-lg transition flex items-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i>
+                    <span>Konsultasi WA</span>
+                </a>
+            </div>
+
+            <div class="border-t border-purple-900/40 pt-6 flex gap-8">
+                <div>
+                    <div class="text-2xl font-bold text-white mb-1">5k+</div>
+                    <div class="text-xs text-purple-300">Pelanggan</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-white mb-1">99%</div>
+                    <div class="text-xs text-purple-300">Puas</div>
+                </div>
+                <div>
+                    <div class="text-2xl font-bold text-white mb-1">24/7</div>
+                    <div class="text-xs text-purple-300">Support</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Kolom Gambar -->
+        <div class="w-full lg:w-1/2 relative mt-8 lg:mt-0">
+            <!-- Efek glow di belakang gambar -->
+            <div class="absolute inset-0 bg-purple-600/20 rounded-[2rem] blur-3xl transform -rotate-6 scale-105 pointer-events-none"></div>
+            <!-- Frame Gambar -->
+            <div class="relative p-3 bg-white/5 border border-purple-500/30 backdrop-blur-sm rounded-[2rem] shadow-2xl">
+                <img src="https://images.unsplash.com/photo-1496181133206-80ce9b88a853?q=80&w=1000&auto=format&fit=crop" 
+                     alt="Laptop Premium" 
+                     class="w-full h-auto rounded-[1.5rem] object-cover" />
+            </div>
+        </div>
+    </section>
+
+    <section class="w-full bg-brand-card/50 py-16 border-y border-purple-900/40 mb-12 mt-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-2xl md:text-3xl font-bold text-white text-center mb-3">Kenapa Beli di Sini?</h2>
+            <div class="w-16 h-1 bg-purple-500 mx-auto rounded-full mb-12"></div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Card 1 -->
+                <div class="glass-card p-8 rounded-2xl text-center hover:-translate-y-1 transition duration-300">
+                    <div class="w-14 h-14 bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-5 border border-purple-700/50">
+                        <i class="fa-solid fa-tag text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Harga Termurah</h3>
+                    <p class="text-sm text-purple-200 leading-relaxed">Berani diadu! Kami memberikan harga terbaik untuk produk berkualitas.</p>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="glass-card p-8 rounded-2xl text-center hover:-translate-y-1 transition duration-300">
+                    <div class="w-14 h-14 bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-5 border border-purple-700/50">
+                        <i class="fa-solid fa-shield-halved text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Garansi Resmi</h3>
+                    <p class="text-sm text-purple-200 leading-relaxed">Semua produk baru bergaransi resmi, belanja tenang tanpa was-was.</p>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="glass-card p-8 rounded-2xl text-center hover:-translate-y-1 transition duration-300">
+                    <div class="w-14 h-14 bg-purple-900/50 rounded-full flex items-center justify-center mx-auto mb-5 border border-purple-700/50">
+                        <i class="fa-solid fa-truck-fast text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-white mb-3">Pengiriman Cepat</h3>
+                    <p class="text-sm text-purple-200 leading-relaxed">Pesan hari ini, kami usahakan kirim hari ini juga. Packing super aman.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main id="katalog" class="max-w-7xl mx-auto px-6 py-8 flex-grow w-full">
+        <div class="flex justify-between items-center mb-8">
+            <h3 class="text-2xl font-bold text-white border-l-4 border-purple-500 pl-3">Katalog Produk</h3>
+            <span id="productStatus" class="text-xs text-purple-300 bg-purple-950/60 px-3 py-1.5 rounded-lg border border-purple-800/40">Memuat database Google Sheets...</span>
+        </div>
+
+        <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Produk akan dimuat dinamis lewat JavaScript -->
+        </div>
+    </main>
+
+    <section id="testimoni" class="max-w-7xl mx-auto px-6 py-12 w-full">
+        <h3 class="text-2xl font-bold text-white text-center mb-8">Apa Kata Pelanggan Kami...</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="flex text-yellow-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="text-sm text-purple-200 mb-4">"Beli laptop bekas rasa baru di sini sangat memuaskan. Respon admin cepat dan barang sesuai deskripsi!"</p>
+                <div class="font-semibold text-white text-sm">- Budi Santoso, Bogor</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="flex text-yellow-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="text-sm text-purple-200 mb-4">"Pengiriman cepat pakai JNE reguler, packing aman berlapis bubble wrap tebal. Recommended seller!"</p>
+                <div class="font-semibold text-white text-sm">- Siska Meliani, Depok</div>
+            </div>
+            <div class="glass-card p-6 rounded-2xl">
+                <div class="flex text-yellow-400 mb-3"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                <p class="text-sm text-purple-200 mb-4">"Harganya paling bersaing di Cibinong. Bisa konsultasi dulu lewat WhatsApp sebelum beli."</p>
+                <div class="font-semibold text-white text-sm">- Rifki Pratama, Cibinong</div>
+            </div>
+        </div>
+    </section>
+
+    <section class="w-full bg-gradient-to-r from-purple-800 to-indigo-900 py-16 mt-8 border-y border-purple-900/40">
+        <div class="max-w-4xl mx-auto text-center px-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Masih Ragu Pilih yang Mana?</h2>
+            <p class="text-purple-200 text-base mb-8 max-w-2xl mx-auto">Jangan sungkan untuk bertanya. Admin kami siap membantu mencarikan gadget yang pas dengan budgetmu.</p>
+            <a href="https://wa.me/6285695316096?text=Halo%20Admin,%20saya%20mau%20tanya%20ketersediaan%20produk." target="_blank" class="inline-flex items-center space-x-2 bg-white text-purple-900 hover:bg-gray-100 font-bold px-8 py-3.5 rounded-full shadow-lg transition transform hover:scale-105">
+                <i class="fa-brands fa-whatsapp text-2xl text-green-500"></i>
+                <span>Tanya Admin via WA</span>
+            </a>
+        </div>
+    </section>
+
+    <div id="cartModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-lg rounded-3xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <button onclick="closeCart()" class="absolute top-4 right-4 text-purple-300 hover:text-white text-lg"><i class="fa-solid fa-xmark"></i></button>
+            <h3 class="text-xl font-bold text-white mb-4"><i class="fa-solid fa-cart-shopping mr-2 text-purple-400"></i> Keranjang & Checkout</h3>
+            
+            <div id="cartItemsList" class="divide-y divide-purple-900/40 mb-4 max-h-48 overflow-y-auto pr-2">
+                <!-- Item cart -->
+            </div>
+
+            <div class="border-t border-purple-900/40 pt-4 space-y-3">
+                <h4 class="text-sm font-semibold text-purple-300">Form Pengiriman (Seluruh Indonesia)</h4>
+                
+                <div>
+                    <label class="block text-xs text-purple-300 mb-1">Nama Lengkap Pemesan</label>
+                    <input type="text" id="custName" class="w-full bg-purple-950/40 border border-purple-800/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" placeholder="Contoh: Andi Pratama">
+                </div>
+                <div>
+                    <label class="block text-xs text-purple-300 mb-1">No. WhatsApp</label>
+                    <input type="tel" id="custPhone" class="w-full bg-purple-950/40 border border-purple-800/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" placeholder="08xxxxxxxxxx">
+                </div>
+                <div>
+                    <label class="block text-xs text-purple-300 mb-1">Alamat Lengkap Pengiriman (Jalan, No. Rumah, RT/RW, Kelurahan)</label>
+                    <textarea id="custAddress" rows="2" class="w-full bg-purple-950/40 border border-purple-800/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500" placeholder="Jl. Mayor Oking No. 12, RT 01/02..."></textarea>
+                </div>
+                <div class="grid grid-cols-2 gap-3">
+                    <div>
+                        <label class="block text-xs text-purple-300 mb-1">Kode Pos (5 Digit)</label>
+                        <input type="text" id="postalCode" maxlength="5" pattern="[0-9]*" oninput="fetchShippingRatesByPostalCode()" class="w-full bg-purple-950/40 border border-purple-800/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500 font-mono tracking-wider" placeholder="Contoh: 16911">
+                        <div id="locationInfo" class="mt-1.5 text-[11px] text-emerald-400 font-medium hidden"></div>
+                    </div>
+                    <div>
+                        <label class="block text-xs text-purple-300 mb-1">Pilih Ekspedisi (KiriminAja)</label>
+                        <select id="courierSelect" onchange="updateGrandTotal()" class="w-full bg-purple-950/40 border border-purple-800/40 rounded-xl px-3 py-2 text-sm text-white focus:outline-none focus:border-purple-500">
+                            <option value="">-- Masukkan 5 Digit Kode Pos --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="bg-purple-950/60 p-3 rounded-xl border border-purple-800/40 text-xs space-y-1">
+                    <div class="flex justify-between"><span>Total Berat:</span><span id="totalWeight" class="font-bold text-white">0 Kg</span></div>
+                    <div class="flex justify-between"><span>Subtotal Produk:</span><span id="subTotal" class="font-bold text-white">Rp 0</span></div>
+                    <div class="flex justify-between"><span>Biaya Kirim:</span><span id="shippingCost" class="font-bold text-white">Rp 0</span></div>
+                    <div class="flex justify-between text-sm pt-1 border-t border-purple-800/40 text-purple-300 font-bold"><span>Total Tagihan:</span><span id="grandTotal" class="text-pink-400">Rp 0</span></div>
+                </div>
+
+                <button onclick="processCheckout()" class="w-full bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white font-semibold py-3 rounded-xl shadow-lg transition">Buat Pesanan & Terbitkan Tagihan</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="invoiceModal" class="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm hidden flex items-center justify-center p-4">
+        <div class="glass-card w-full max-w-md rounded-3xl p-6 relative max-h-[90vh] overflow-y-auto">
+            <h3 class="text-xl font-bold text-emerald-400 mb-1 text-center"><i class="fa-solid fa-circle-check mr-2"></i> Pesanan Berhasil Dibuat!</h3>
+            <p class="text-xs text-purple-300 text-center mb-4">Data penjualan telah terekam otomatis di sistem Google Sheets.</p>
+            
+            <div class="bg-purple-950/60 p-4 rounded-2xl border border-purple-800/40 text-xs space-y-2 mb-4">
+                <div class="flex justify-between"><span>No. Invoice:</span><span id="invNo" class="font-mono text-white font-bold">INV-001</span></div>
+                <div class="flex justify-between"><span>Nama Pemesan:</span><span id="invName" class="text-white font-semibold"></span></div>
+                <div class="flex justify-between"><span>No. WhatsApp:</span><span id="invPhone" class="text-white"></span></div>
+                <div class="flex justify-between"><span>Alamat Tujuan:</span><span id="invDestination" class="text-white text-right max-w-[200px] truncate"></span></div>
+                <div class="flex justify-between"><span>Kurir & Ongkir:</span><span id="invCourier" class="text-white"></span></div>
+                <div class="flex justify-between border-t border-purple-800/40 pt-2 text-sm font-bold"><span>Total Pembayaran:</span><span id="invTotalAmount" class="text-pink-400"></span></div>
+            </div>
+
+            <div class="bg-amber-950/40 p-3 rounded-xl border border-amber-800/40 text-xs text-amber-200 mb-4">
+                <p class="font-bold mb-1"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Transfer Pembayaran ke:</p>
+                <p class="font-mono text-white text-sm font-bold">BSI : 7032-0144-82</p>
+                <p>a/n SAIFUDIN</p>
+            </div>
+
+            <div class="flex space-x-3">
+                <button onclick="sendWhatsAppOrder()" class="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-3 rounded-xl shadow-lg transition text-xs flex items-center justify-center space-x-2">
+                    <i class="fa-brands fa-whatsapp text-base"></i><span>Kirim Bukti via WA</span>
+                </button>
+                <button onclick="closeInvoiceModal()" class="bg-white/10 hover:bg-white/20 text-white font-semibold px-4 py-3 rounded-xl text-xs transition">Tutup</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-brand-dark pt-16 pb-8 border-t border-purple-900/40 mt-12">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+            <div>
+                <div class="flex items-center space-x-3 mb-6">
+                    <div class="bg-purple-600 p-2.5 rounded-xl shadow-lg shadow-purple-500/30">
+                        <i class="fa-solid fa-laptop-code text-white"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white tracking-wide">Laptop & Gadget</h3>
+                </div>
+                <p class="text-sm text-purple-300 mb-6 leading-relaxed">Toko Gadget Terpercaya. Menyediakan berbagai macam Laptop, Handphone, dan aksesoris original bergaransi resmi dengan harga bersahabat.</p>
+                <div class="flex space-x-4 text-purple-400">
+                    <a href="#" class="hover:text-white transition transform hover:scale-110"><i class="fa-brands fa-instagram text-xl"></i></a>
+                    <a href="#" class="hover:text-white transition transform hover:scale-110"><i class="fa-brands fa-facebook text-xl"></i></a>
+                    <a href="#" class="hover:text-white transition transform hover:scale-110"><i class="fa-brands fa-tiktok text-xl"></i></a>
+                </div>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 text-lg">Tautan Cepat</h4>
+                <ul class="space-y-3 text-sm text-purple-300">
+                    <li><a href="#" class="hover:text-purple-400 transition">Beranda</a></li>
+                    <li><a href="#katalog" class="hover:text-purple-400 transition">Katalog Produk</a></li>
+                    <li><a href="#" class="hover:text-purple-400 transition">Cara Pembelian</a></li>
+                    <li><a href="#" class="hover:text-purple-400 transition">Syarat & Ketentuan</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="text-white font-bold mb-6 text-lg">Hubungi Kami</h4>
+                <ul class="space-y-4 text-sm text-purple-300">
+                    <li class="flex items-start space-x-3">
+                        <i class="fa-solid fa-location-dot mt-1 text-purple-500 w-5 text-center"></i>
+                        <span class="leading-relaxed">----Menyusul-----</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <i class="fa-solid fa-phone text-purple-500 w-5 text-center"></i>
+                        <span>+62 8569 5316 096</span>
+                    </li>
+                    <li class="flex items-center space-x-3">
+                        <i class="fa-solid fa-envelope text-purple-500 w-5 text-center"></i>
+                        <span>halo@laptopcibinong.com</span>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="max-w-7xl mx-auto px-6 text-center text-xs text-purple-500 border-t border-purple-900/40 pt-8">
+            <p>&copy; 2026 Toko Laptop & Gadget Cibinong. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Library Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+
+    <!-- JavaScript Logika Aplikasi (Sudah Terhubung ke Firebase) -->
+    <script>
+        /// ==========================================
+        // 1. KONFIGURASI FIREBASE
+        // ==========================================
+        const firebaseConfig = {
+            apiKey: "AIzaSyAPMgrA5elQP5gLEijJcWHi_YjRFSf43f0",
+            authDomain: "tokoonlineku-6af6a.firebaseapp.com",
+            databaseURL: "https://tokoonlineku-6af6a-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "tokoonlineku-6af6a",
+            storageBucket: "tokoonlineku-6af6a.firebasestorage.app",
+            messagingSenderId: "233513919609",
+            appId: "1:233513919609:web:0cbf2e9ab4ee15d0cca0a8",
+            measurementId: "G-TVB5LGVPQF"
+        };
+
+        // Inisialisasi Firebase & Firestore
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+        
+        // ==========================================
+        // 2. VARIABEL APLIKASI
+        // ==========================================
+        let products = [];
+        let cart = [];
+        let currentOrderData = null;
+        let dynamicShippingCost = 0;
+
+        window.onload = function() {
+            fetchProducts();
+        }
+
+        // ==========================================
+        // 3. MENGAMBIL DATA KATALOG DARI FIREBASE
+        // ==========================================
+        async function fetchProducts() {
+            const statusEl = document.getElementById('productStatus');
+            try {
+                // Mengambil data dari koleksi "produk" di Firestore
+                const snapshot = await db.collection("produk").get();
+                
+                if (!snapshot.empty) {
+                    // Mengubah data Firestore menjadi array yang bisa dibaca HTML
+                    products = snapshot.docs.map(doc => doc.data());
+                    renderProducts();
+                    statusEl.textContent = `Menampilkan ${products.length} produk`;
+                } else {
+                    loadFallbackProducts();
+                }
+            } catch (err) {
+                console.warn("Gagal konek ke Firebase, pakai mode demo:", err);
+                loadFallbackProducts();
+            }
+        }
+
+        // Fungsi fallback jika database kosong / error
+        function loadFallbackProducts() {
+            products = [
+                { nama: "Asus ROG Strix G15", kategori: "Laptop Gaming", harga: 14500000, hargacoret: 16000000, spesifikasi: "AMD Ryzen 7, RTX 3060, 16GB RAM, 512GB SSD", linkgambar: "https://images.unsplash.com/photo-1603302576837-37561b2e2302?w=500" },
+                { nama: "MacBook Air M1 2020", kategori: "Laptop Ultrabook", harga: 11200000, hargacoret: 12500000, spesifikasi: "Apple M1 Chip, 8GB RAM, 256GB SSD, Space Grey", linkgambar: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500" }
+            ];
+            renderProducts();
+            document.getElementById('productStatus').textContent = `Menampilkan ${products.length} produk (Mode Offline/Demo)`;
+        }
+
+        function renderProducts() {
+            const grid = document.getElementById('productGrid');
+            grid.innerHTML = '';
+            products.forEach((p, idx) => {
+                let rawImg = p.linkgambar || '';
+                let imgSrc = 'https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500';
+                
+                if (rawImg.includes('drive.google.com')) {
+                    const matchId = rawImg.match(/\/d\/([a-zA-Z0-9_-]+)/) || rawImg.match(/id=([a-zA-Z0-9_-]+)/);
+                    if (matchId && matchId[1]) {
+                        imgSrc = `https://lh3.googleusercontent.com/d/${matchId[1]}`;
+                    }
+                } else if (rawImg.startsWith('http')) {
+                    imgSrc = rawImg;
+                }
+
+                // Jika di file JSON Anda harganya pakai koma, kita bersihkan dulu komanya agar jadi angka murni
+                const hargaBersih = String(p.harga).replace(/,/g, '');
+                const hargaCoretBersih = String(p.hargacoret || '0').replace(/,/g, '');
+
+                const hargaNum = Number(hargaBersih) || 0;
+                const hargaCoretNum = Number(hargaCoretBersih) || 0;
+                
+                grid.innerHTML += `
+                    <div class="glass-card rounded-2xl overflow-hidden flex flex-col justify-between hover:border-purple-500/50 transition">
+                        <div>
+                            <div class="h-48 overflow-hidden bg-purple-950/40 relative">
+                                <img src="${imgSrc}" alt="${p.nama}" class="w-full h-full object-cover" onerror="this.src='https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=500'">
+                                <span class="absolute top-2 left-2 bg-purple-600 text-white text-[10px] px-2.5 py-1 rounded-full font-semibold uppercase">${p.kategori || 'Laptop'}</span>
+                            </div>
+                            <div class="p-4">
+                                <h4 class="font-bold text-white text-base mb-1">${p.nama}</h4>
+                                <p class="text-xs text-purple-300 line-clamp-2 mb-3">${p.spesifikasi || ''}</p>
+                                <div class="flex items-baseline space-x-2">
+                                    <span class="text-pink-400 font-bold text-lg">Rp ${hargaNum.toLocaleString('id-ID')}</span>
+                                    ${hargaCoretNum > 0 ? `<span class="text-xs text-purple-400 line-through">Rp ${hargaCoretNum.toLocaleString('id-ID')}</span>` : ''}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-4 pt-0">
+                            <button onclick="addToCart(${idx})" class="w-full bg-purple-600 hover:bg-purple-500 text-white text-sm font-semibold py-2.5 rounded-xl transition shadow-md shadow-purple-600/30 flex items-center justify-center space-x-2">
+                                <i class="fa-solid fa-cart-plus"></i><span>Tambah ke Keranjang</span>
+                            </button>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+
+        function addToCart(index) {
+            const prod = products[index];
+            const cat = (prod.kategori || '').toLowerCase();
+            const weight = cat.includes('hp') || cat.includes('handphone') || cat.includes('aksesoris') ? 1 : 2;
+
+            const hargaBersih = String(prod.harga).replace(/,/g, '');
+            const hargaMurni = Number(hargaBersih) || 0;
+
+            const existing = cart.find(item => item.nama === prod.nama);
+            if (existing) {
+                existing.qty += 1;
+            } else {
+                cart.push({
+                    nama: prod.nama,
+                    harga: hargaMurni,
+                    weight: weight,
+                    qty: 1
+                });
+            }
+            updateCartUI();
+            openCart();
+        }
+
+        function updateCartUI() {
+            const countEl = document.getElementById('cartCount');
+            const listEl = document.getElementById('cartItemsList');
+            
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            countEl.textContent = totalQty;
+
+            if (cart.length === 0) {
+                listEl.innerHTML = `<p class="text-xs text-purple-300 text-center py-4">Keranjang belanja masih kosong.</p>`;
+            } else {
+                listEl.innerHTML = cart.map((item, idx) => `
+                    <div class="py-2.5 flex justify-between items-center text-xs">
+                        <div>
+                            <div class="font-bold text-white">${item.nama}</div>
+                            <div class="text-purple-300">Rp ${item.harga.toLocaleString('id-ID')} x ${item.qty}</div>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <button onclick="changeQty(${idx}, -1)" class="w-6 h-6 bg-purple-900 text-white rounded-lg hover:bg-purple-700">-</button>
+                            <span class="text-white font-bold">${item.qty}</span>
+                            <button onclick="changeQty(${idx}, 1)" class="w-6 h-6 bg-purple-900 text-white rounded-lg hover:bg-purple-700">+</button>
+                        </div>
+                    </div>
+                `).join('');
+            }
+            
+            if (document.getElementById('postalCode').value.length === 5) {
+                fetchShippingRatesByPostalCode();
+            } else {
+                updateGrandTotal();
+            }
+        }
+
+        function changeQty(idx, delta) {
+            cart[idx].qty += delta;
+            if (cart[idx].qty <= 0) {
+                cart.splice(idx, 1);
+            }
+            updateCartUI();
+        }
+
+        function getRegionByPostalCode(zip) {
+            if (!zip || zip.length < 2) return { zone: 'Selesaikan Kode Pos', baseCost: 0, days: '-' };
+            const prefix2 = zip.substring(0, 2);
+            const p1 = zip.charAt(0);
+
+            if (prefix2 === '16') return { zone: 'Area Lokal (Kab. Bogor & Depok)', baseCost: 9000, days: '1-2 Hari' };
+            if (['10', '11', '12', '13', '14', '15', '17'].includes(prefix2)) return { zone: 'Jabodetabek & Banten', baseCost: 14000, days: '1-2 Hari' };
+            if (p1 === '4') return { zone: 'Jawa Barat & Banten Luar', baseCost: 18000, days: '2-3 Hari' };
+            if (p1 === '5') return { zone: 'Jawa Tengah & DIY', baseCost: 24000, days: '2-3 Hari' };
+            if (p1 === '6') return { zone: 'Jawa Timur & Madura', baseCost: 32000, days: '2-4 Hari' };
+            if (p1 === '2' || p1 === '3') {
+                if (['34', '35'].includes(prefix2)) return { zone: 'Sumatra (Lampung)', baseCost: 35000, days: '3-4 Hari' };
+                if (['30', '31'].includes(prefix2)) return { zone: 'Sumatra (Palembang / Sumsel)', baseCost: 40000, days: '3-4 Hari' };
+                if (['20', '21', '22'].includes(prefix2)) return { zone: 'Sumatra (Medan / Sumut)', baseCost: 55000, days: '3-5 Hari' };
+                return { zone: 'Pulau Sumatra', baseCost: 48000, days: '3-5 Hari' };
+            }
+            if (p1 === '7') return { zone: 'Pulau Kalimantan', baseCost: 58000, days: '3-5 Hari' };
+            if (p1 === '8') {
+                if (['80', '81', '82'].includes(prefix2)) return { zone: 'Bali (Denpasar & Sekitarnya)', baseCost: 38000, days: '3-4 Hari' };
+                return { zone: 'Nusa Tenggara & Bali', baseCost: 52000, days: '4-5 Hari' };
+            }
+            if (p1 === '9') {
+                if (['98', '99'].includes(prefix2)) return { zone: 'Papua (Jayapura, Sorong, Timika)', baseCost: 130000, days: '5-8 Hari' };
+                return { zone: 'Sulawesi & Maluku', baseCost: 75000, days: '4-7 Hari' };
+            }
+
+            return { zone: 'Wilayah Indonesia Lainnya', baseCost: 50000, days: '3-5 Hari' };
+        }
+
+        function fetchShippingRatesByPostalCode() {
+            const inputEl = document.getElementById('postalCode');
+            const rawZip = inputEl.value.replace(/\D/g, '');
+            inputEl.value = rawZip; 
+            
+            const selectService = document.getElementById('courierSelect');
+            const infoEl = document.getElementById('locationInfo');
+
+            if (rawZip.length < 5) {
+                selectService.innerHTML = '<option value="">-- Masukkan 5 Digit Kode Pos --</option>';
+                infoEl.classList.add('hidden');
+                dynamicShippingCost = 0;
+                updateGrandTotal();
+                return;
+            }
+
+            const region = getRegionByPostalCode(rawZip);
+            infoEl.innerHTML = `<i class="fa-solid fa-location-dot text-emerald-400 mr-1"></i> Terdeteksi: <strong class="text-white">${region.zone}</strong>`;
+            infoEl.className = "mt-1.5 text-[11px] text-emerald-400 font-medium block";
+            infoEl.classList.remove('hidden');
+
+            selectService.innerHTML = `<option value="">Menghitung tarif KiriminAja...</option>`;
+
+            setTimeout(() => {
+                populatePostalShippingOptions(rawZip, region);
+            }, 300);
+        }
+
+        function populatePostalShippingOptions(zip, region) {
+            const selectService = document.getElementById('courierSelect');
+            const base = region.baseCost;
+            
+            const totalWeight = cart.reduce((sum, item) => sum + (item.weight * item.qty), 0) || 1;
+            const weightCost = base * totalWeight;
+
+            const options = [
+                { courier: 'JNE', service: 'REG', cost: weightCost + (4000 * totalWeight), etd: region.days },
+                { courier: 'JNE', service: 'YES (Next Day)', cost: weightCost + (18000 * totalWeight), etd: '1 Hari' },
+                { courier: 'J&T', service: 'EZ', cost: weightCost + (5000 * totalWeight), etd: region.days },
+                { courier: 'SiCepat', service: 'REG', cost: weightCost + (3000 * totalWeight), etd: region.days },
+                { courier: 'AnterAja', service: 'Reguler', cost: weightCost + (2000 * totalWeight), etd: region.days }
+            ];
+
+            selectService.innerHTML = `<option value="">-- Pilih Ekspedisi KiriminAja --</option>` + 
+                options.map(opt => `<option value="${opt.cost}">${opt.courier} ${opt.service} - Rp ${opt.cost.toLocaleString('id-ID')} (${opt.etd})</option>`).join('');
+            
+            updateGrandTotal();
+        }
+
+        function updateGrandTotal() {
+            const subtotal = cart.reduce((sum, item) => sum + (item.harga * item.qty), 0);
+            const totalWeight = cart.reduce((sum, item) => sum + (item.weight * item.qty), 0);
+            
+            const courierSelect = document.getElementById('courierSelect');
+            let shippingCost = Number(courierSelect.value) || 0;
+            dynamicShippingCost = shippingCost;
+
+            const grandTotal = subtotal + shippingCost;
+
+            document.getElementById('totalWeight').textContent = `${totalWeight} Kg`;
+            document.getElementById('subTotal').textContent = `Rp ${subtotal.toLocaleString('id-ID')}`;
+            document.getElementById('shippingCost').textContent = `Rp ${shippingCost.toLocaleString('id-ID')}`;
+            document.getElementById('grandTotal').textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+        }
+
+        function openCart() {
+            document.getElementById('cartModal').classList.remove('hidden');
+        }
+
+        function closeCart() {
+            document.getElementById('cartModal').classList.add('hidden');
+        }
+
+        // ==========================================
+        // 4. SIMPAN PESANAN KE DATABASE FIREBASE
+        // ==========================================
+        async function processCheckout() {
+            if (cart.length === 0) {
+                alert("Keranjang masih kosong!");
+                return;
+            }
+            const name = document.getElementById('custName').value.trim();
+            const phone = document.getElementById('custPhone').value.trim();
+            const address = document.getElementById('custAddress').value.trim();
+            const postal = document.getElementById('postalCode').value.trim();
+            const courierSelect = document.getElementById('courierSelect');
+            const courierName = courierSelect.options[courierSelect.selectedIndex].text;
+
+            if (!name || !phone || !address || postal.length !== 5) {
+                alert("Mohon isi Lengkap Nama, No. WhatsApp, Alamat, dan Kode Pos 5 digit dengan benar!");
+                return;
+            }
+
+            if (!courierSelect.value) {
+                alert("Silakan pilih ekspedisi pengiriman terlebih dahulu!");
+                return;
+            }
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.harga * item.qty), 0);
+            const totalWeight = cart.reduce((sum, item) => sum + (item.weight * item.qty), 0);
+            
+            let shippingCost = dynamicShippingCost;
+            const grandTotal = subtotal + shippingCost;
+
+            const productNamesSummary = cart.map(i => `${i.nama} (${i.qty}x)`).join(', ');
+            const invoiceNo = 'INV-' + Math.floor(100000 + Math.random() * 900000);
+
+            currentOrderData = {
+                invoiceNo, name, phone, address, postal, courier: `${courierName} (Ongkir: Rp ${shippingCost.toLocaleString('id-ID')})`,
+                grandTotal, productNamesSummary, subtotal, shippingCost
+            };
+
+            // Mengirim data pesanan ke koleksi "pesanan" di Firestore
+            try {
+                await db.collection("pesanan").add({
+                    invoice: invoiceNo,
+                    produk: productNamesSummary,
+                    hargaJual: grandTotal,
+                    pembeli: name,
+                    expedisi: courierName,
+                    waPembeli: phone,
+                    biayaKirim: shippingCost,
+                    kodePos: postal,
+                    alamatKirim: address,
+                    tanggal: firebase.firestore.FieldValue.serverTimestamp() // Catat waktu otomatis
+                });
+            } catch (err) {
+                console.error("Gagal menyimpan pesanan ke Firebase:", err);
+            }
+
+            closeCart();
+            document.getElementById('invNo').textContent = invoiceNo;
+            document.getElementById('invName').textContent = name;
+            document.getElementById('invPhone').textContent = phone;
+            document.getElementById('invDestination').textContent = `${address} (Kodepos: ${postal})`;
+            document.getElementById('invCourier').textContent = `${courierName} (${totalWeight} Kg)`;
+            document.getElementById('invTotalAmount').textContent = `Rp ${grandTotal.toLocaleString('id-ID')}`;
+            document.getElementById('invoiceModal').classList.remove('hidden');
+        }
+
+        function closeInvoiceModal() {
+            document.getElementById('invoiceModal').classList.add('hidden');
+            cart = [];
+            updateCartUI();
+        }
+
+        function sendWhatsAppOrder() {
+            const itemsListText = cart.map(i => `- ${i.nama} (${i.qty}x)`).join('%0A');
+            const message = `Halo Admin,%0ASaya ingin konfirmasi pesanan berikut:%0A%0A*No. Invoice:* ${currentOrderData.invoiceNo}%0A*Nama:* ${currentOrderData.name}%0A*No. HP:* ${currentOrderData.phone}%0A*Alamat:* ${currentOrderData.address} (Kodepos: ${currentOrderData.postal})%0A*Kurir:* ${currentOrderData.courier}%0A%0A*Daftar Belanjaan:*%0A${itemsListText}%0A%0A*Subtotal Produk:* Rp ${currentOrderData.subtotal.toLocaleString('id-ID')}%0A*Total Pembayaran (+ Ongkir):* Rp ${currentOrderData.grandTotal.toLocaleString('id-ID')}%0A%0ASaya akan segera melakukan transfer ke rekening. Mohon diproses ya Kak. Terima kasih!`;
+            
+            window.open(`https://wa.me/6285695316096?text=${message}`, '_blank');
+            closeInvoiceModal();
+        }
+    </script>
+</body>
+</html>
