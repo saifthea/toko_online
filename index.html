@@ -516,31 +516,51 @@
                 destSuggestionsEl.classList.remove('hidden');
 
                 try {
-                    const res = await fetch(`${APPS_SCRIPT_URL}?q=${encodeURIComponent(q)}`);
-                    const data = await res.json();
-                    const results = (data.ok && data.results) ? data.results : [];
+                    let results = [];
+                    let isDemo = false;
+
+                    try {
+                        const res = await fetch(`${APPS_SCRIPT_URL}?q=${encodeURIComponent(q)}`);
+                        if (!res.ok) throw new Error("Endpoint Netlify tidak ditemukan");
+                        
+                        const data = await res.json();
+                        if (data.ok && data.results && data.results.length > 0) {
+                            results = data.results;
+                        } else {
+                            throw new Error("API Key belum diset / Lokasi kosong");
+                        }
+                    } catch (fetchErr) {
+                        console.warn("Gagal fetch API Asli, mengaktifkan Mode Demo:", fetchErr);
+                        isDemo = true;
+                        // Data demo jika pratinjau gagal / API Key salah
+                        results = [
+                            { id: "M1", label: `Kec. ${q} (Hasil Pencarian Mode Demo)` },
+                            { id: "M2", label: `Kec. ${q} Barat, Mode Demo` }
+                        ];
+                    }
 
                     if (results.length > 0) {
                         destSuggestionsEl.innerHTML = results.map(r => 
-                            `<div class="p-3 hover:bg-purple-600/40 cursor-pointer text-xs text-white border-b border-purple-800/40 last:border-0 transition" data-destid="${r.id}" data-destlabel="${r.label}">
-                                <i class="fa-solid fa-location-dot text-purple-400 mr-2"></i>${r.label}
+                            `<div class="p-3 hover:bg-purple-600/40 cursor-pointer text-xs text-white border-b border-purple-800/40 last:border-0 transition flex justify-between items-center" data-destid="${r.id}" data-destlabel="${r.label}" data-isdemo="${isDemo}">
+                                <span class="truncate pr-2"><i class="fa-solid fa-location-dot text-purple-400 mr-2"></i>${r.label}</span>
+                                ${isDemo ? '<span class="text-[9px] bg-pink-500/20 text-pink-300 px-1.5 py-0.5 rounded font-bold shrink-0">DEMO</span>' : ''}
                             </div>`
                         ).join('');
                         
                         destSuggestionsEl.querySelectorAll('[data-destid]').forEach(el => {
-                            el.onclick = () => selectDestination(el.dataset.destid, el.dataset.destlabel);
+                            el.onclick = () => selectDestination(el.dataset.destid, el.dataset.destlabel, el.dataset.isdemo === 'true');
                         });
                     } else {
-                        destSuggestionsEl.innerHTML = '<div class="p-3 text-xs text-pink-400">Lokasi tidak ditemukan, coba kata kunci lain.</div>';
+                        destSuggestionsEl.innerHTML = '<div class="p-3 text-xs text-pink-400">Lokasi tidak ditemukan. Coba ketik nama kecamatan saja (misal: "Rumbia").</div>';
                     }
                 } catch (e) {
-                    destSuggestionsEl.innerHTML = '<div class="p-3 text-xs text-red-400">Gagal terhubung ke Netlify Function.</div>';
+                    destSuggestionsEl.innerHTML = '<div class="p-3 text-xs text-red-400">Terjadi kesalahan sistem.</div>';
                 }
             }, 350);
         });
 
         // Pilih Lokasi & Dapatkan Tarif Ekspedisi
-        async function selectDestination(id, label) {
+        async function selectDestination(id, label, isDemo = false) {
             selectedDestination = { id, label };
             selectedShippingOption = null;
             
@@ -552,15 +572,28 @@
             shippingOptionsEl.innerHTML = '<p class="text-xs text-purple-300 animate-pulse"><i class="fa-solid fa-spinner fa-spin mr-1"></i> Menghitung tarif pengiriman...</p>';
 
             const items = cart.map(c => ({ kode_produk: c.kode_produk, qty: c.qty }));
+            const totalWeight = cart.reduce((sum, item) => sum + (item.weight * item.qty), 0) || 1;
 
             try {
-                const res = await fetch(APPS_SCRIPT_URL, {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ destination_id: id, items: items })
-                });
-                const data = await res.json();
-                const options = data.options || [];
+                let options = [];
+
+                if (isDemo) {
+                    await new Promise(r => setTimeout(r, 600)); // Simulasi loading untuk mode demo
+                    const baseCost = 15000 * totalWeight;
+                    options = [
+                        { courier: 'JNE', service: 'REG', cost: baseCost, etd: '2-3 Hari' },
+                        { courier: 'J&T', service: 'EZ', cost: baseCost - 1000, etd: '2-3 Hari' },
+                        { courier: 'SiCepat', service: 'HALU', cost: baseCost - 3000, etd: '3-5 Hari' }
+                    ];
+                } else {
+                    const res = await fetch(APPS_SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ destination_id: id, items: items })
+                    });
+                    const data = await res.json();
+                    options = data.options || [];
+                }
 
                 if (!options || options.length === 0) {
                     shippingOptionsEl.innerHTML = `<p class="text-xs text-pink-400">Layanan pengiriman tidak tersedia untuk lokasi ini.</p>`;
